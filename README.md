@@ -2,6 +2,9 @@
 
 The Medical Management System, developed in Java and MySQL, is a pharmacy inventory management solution. It enables easy addition and deletion of products and offers a streamlined purchase management module, allowing healthcare professionals to efficiently manage and monitor pharmaceutical inventory. The system prioritizes user-friendliness, data integrity, and scalability to meet the evolving needs of healthcare facilities.
 
+
+database : nikita , username : Admin , password :admin123
+
 ![image-001](https://github.com/nikisambari/medical-mgt-system/assets/51022485/7e35b89e-923b-4708-b698-11bdc677dd14)
 
 ![image-002](https://github.com/nikisambari/medical-mgt-system/assets/51022485/de391a9a-1cab-4b37-9c57-b1b53d7d0748)
