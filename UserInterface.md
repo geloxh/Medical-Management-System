@@ -1,4 +1,4 @@
-USER INTERFACE
+**USER INTERFACE**
 
 ![image-001](https://github.com/nikisambari/medical-mgt-system/assets/51022485/7e35b89e-923b-4708-b698-11bdc677dd14)
 
