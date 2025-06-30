@@ -1,22 +1,104 @@
-![Cover 2- Pharmacy Management System (1)](https://github.com/nikisambari/medical-mgt-system/assets/51022485/889f368d-497c-4dd4-b784-b3b6a75d037d)
+# Medical Management System v2.0
 
+A professional pharmacy inventory management system built with Java Swing and MySQL.
 
-The Pharmacy Management System, developed in Java and MySQL, is a pharmacy inventory management solution. It enables easy addition and deletion of products and offers a streamlined purchase management module, allowing healthcare professionals to efficiently manage and monitor pharmaceutical inventory. The system prioritizes user-friendliness, data integrity, and scalability to meet the evolving needs of healthcare facilities.
+## Features
 
-**Snapshots**
+### 🏥 Core Functionality
+- **Product Management**: Add, edit, delete, and search medical products
+- **Supplier Management**: Manage supplier information and contacts
+- **Purchase Management**: Handle product purchases with cart functionality
+- **Sales Records**: View and export sales data with reporting
 
-![image-001](https://github.com/nikisambari/medical-mgt-system/assets/51022485/7e35b89e-923b-4708-b698-11bdc677dd14)
+### 🎨 Modern UI/UX
+- Clean, professional tabbed interface
+- Responsive design with proper layouts
+- Color-coded buttons and status indicators
+- Modern dialog boxes with validation
 
-![image-002](https://github.com/nikisambari/medical-mgt-system/assets/51022485/de391a9a-1cab-4b37-9c57-b1b53d7d0748)
+### 🔧 Technical Improvements
+- **MVC Architecture**: Proper separation of concerns
+- **Database Integration**: MySQL with connection pooling
+- **Error Handling**: Comprehensive exception handling
+- **Data Validation**: Input validation and sanitization
+- **Export Functionality**: CSV export for reports
 
-![image-003](https://github.com/nikisambari/medical-mgt-system/assets/51022485/b00ad063-23d7-4c49-825d-aec73bd0d6c5)
+## Project Structure
 
-![image-004](https://github.com/nikisambari/medical-mgt-system/assets/51022485/e7a554d0-7f8e-442e-963d-e65d981d752d)
+```
+src/main/java/com/medical/
+├── Main.java                 # Application entry point
+├── model/                    # Data models
+│   ├── Product.java
+│   └── Supplier.java
+├── ui/                       # User interface components
+│   ├── LoginFrame.java
+│   ├── MainFrame.java
+│   ├── ProductPanel.java
+│   ├── ProductDialog.java
+│   ├── SupplierPanel.java
+│   ├── SupplierDialog.java
+│   ├── PurchasePanel.java
+│   └── SalesPanel.java
+└── util/                     # Utility classes
+    └── DatabaseConnection.java
+```
 
-![image-005](https://github.com/nikisambari/medical-mgt-system/assets/51022485/5e48f5c5-83ce-45a8-910f-5fe0d33efac2)
+## Setup Instructions
 
-![image-006](https://github.com/nikisambari/medical-mgt-system/assets/51022485/c5bf6fc6-2cd6-495a-b22e-92c0a6e3cdf9)
+### Prerequisites
+- Java 11 or higher
+- MySQL 8.0 or higher
+- Maven 3.6 or higher
 
-![image-007](https://github.com/nikisambari/medical-mgt-system/assets/51022485/a307355f-6b34-4d77-b889-022acb519e79)
+### Database Setup
+1. Install MySQL and create a database named `medical_system`
+2. Update database credentials in `DatabaseConnection.java` if needed
+3. Tables will be created automatically on first run
 
-![image-008](https://github.com/nikisambari/medical-mgt-system/assets/51022485/52e9c879-b67f-4354-b026-81a6d8a4638b)
+### Running the Application
+1. Clone the repository
+2. Navigate to project directory
+3. Run: `mvn clean compile exec:java -Dexec.mainClass="com.medical.Main"`
+4. Or build JAR: `mvn clean package` then `java -jar target/medical-management-system-2.0.0.jar`
+
+### Default Login
+- Username: `admin`
+- Password: `admin`
+
+## Key Improvements from v1.0
+
+### Code Quality
+- ✅ Proper package structure and naming conventions
+- ✅ Separation of concerns with MVC pattern
+- ✅ Consistent error handling and validation
+- ✅ Modern Java practices and coding standards
+
+### User Experience
+- ✅ Professional login screen
+- ✅ Tabbed interface for better navigation
+- ✅ Intuitive dialogs for data entry
+- ✅ Real-time search and filtering
+- ✅ Export functionality for reports
+
+### Database Design
+- ✅ Proper table relationships and constraints
+- ✅ Auto-increment primary keys
+- ✅ Timestamp tracking for sales
+- ✅ Connection pooling and resource management
+
+### Security & Reliability
+- ✅ SQL injection prevention with PreparedStatements
+- ✅ Input validation and sanitization
+- ✅ Proper resource cleanup
+- ✅ Exception handling with user-friendly messages
+
+## Future Enhancements
+- User role management and authentication
+- Inventory alerts for low stock
+- Advanced reporting and analytics
+- Barcode scanning integration
+- Multi-location support
+
+## License
+This project is licensed under the MIT License.
