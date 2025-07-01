@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/medical_system";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "";
     
     public static Connection getConnection() throws SQLException {
         try {
@@ -19,6 +19,19 @@ public class DatabaseConnection {
         } catch (ClassNotFoundException e) {
             throw new SQLException("MySQL Driver not found", e);
         }
+    }
+
+    public static boolean createUser(String username, String password) {
+        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        try (Connection conn = getConnection();
+             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.executeUpdate();
+            return true;
+            } catch (SQLException e) {
+                return false; // Username might already exist
+            }
     }
     
     public static void initializeDatabase() {
@@ -63,6 +76,30 @@ public class DatabaseConnection {
                     "purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                     ")"
                 );
+
+                // Create users table
+                dbConn.createStatement().execute(
+                    "CREATE TABLE IF NOT EXISTS users(" +
+                    "id INT PRIMARY KEY AUTO_INCREMENT," +
+                    "username VARCHAR(50) UNIQUE NOT NULL," +
+                    "password VARCHAR(100) NOT NULL," +
+                    "role VARCHAR(20) DEFAULT 'User'," +
+                    "created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                    ")"
+                );
+                
+                // Insert default admin user if not exists
+                try (java.sql.PreparedStatement checkAdmin = dbConn.prepareStatement(
+                    "SELECT COUNT(*) FROM users WHERE username = 'admin'");
+                     java.sql.ResultSet rs = checkAdmin.executeQuery()) {
+                    rs.next();
+                    if (rs.getInt(1) == 0) {
+                        try (java.sql.PreparedStatement insertAdmin = dbConn.prepareStatement(
+                            "INSERT INTO users (username, password, role) VALUES ('admin', 'admin', 'Admin')")) {
+                            insertAdmin.executeUpdate();
+                        }
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

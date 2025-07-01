@@ -2,6 +2,7 @@ package com.medical.ui;
 
 import com.medical.model.Supplier;
 import com.medical.util.DatabaseConnection;
+import com.medical.util.ReportPrinter;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.sql.*;
 public class SupplierPanel extends JPanel {
     private JTable supplierTable;
     private DefaultTableModel tableModel;
-    private JButton addButton, editButton, deleteButton, refreshButton;
+    private JButton addButton, editButton, deleteButton, refreshButton, printButton;
 
     public SupplierPanel() {
         initializeComponents();
@@ -41,6 +42,7 @@ public class SupplierPanel extends JPanel {
         editButton = createStyledButton("Edit Supplier", new Color(255, 140, 0));
         deleteButton = createStyledButton("Delete Supplier", new Color(220, 20, 60));
         refreshButton = createStyledButton("Refresh", new Color(70, 130, 180));
+        printButton = createStyledButton("Print Report", new Color(128, 0, 128));
     }
 
     private JButton createStyledButton(String text, Color color) {
@@ -60,6 +62,7 @@ public class SupplierPanel extends JPanel {
         topPanel.add(editButton);
         topPanel.add(deleteButton);
         topPanel.add(refreshButton);
+        topPanel.add(printButton);
 
         JScrollPane scrollPane = new JScrollPane(supplierTable);
         scrollPane.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -73,6 +76,7 @@ public class SupplierPanel extends JPanel {
         editButton.addActionListener(e -> showEditSupplierDialog());
         deleteButton.addActionListener(e -> deleteSelectedSupplier());
         refreshButton.addActionListener(e -> loadSuppliers());
+        printButton.addActionListener(e -> printReport());
     }
 
     private void showAddSupplierDialog() {
@@ -202,5 +206,9 @@ public class SupplierPanel extends JPanel {
 
     private int getSupplierIdFromRow(int row) {
         return (Integer) tableModel.getValueAt(row, 0);
+    }
+
+    private void printReport() {
+        new ReportPrinter(tableModel, "Suppliers Report").printReport();
     }
 }

@@ -2,6 +2,7 @@ package com.medical.ui;
 
 import com.medical.model.Product;
 import com.medical.util.DatabaseConnection;
+import com.medical.util.ReportPrinter;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -17,7 +18,7 @@ public class ProductPanel extends JPanel {
     private JTable productTable;
     private DefaultTableModel tableModel;
     private JTextField searchField;
-    private JButton addButton, editButton, deleteButton, refreshButton;
+    private JButton addButton, editButton, deleteButton, refreshButton, printButton;
 
     public ProductPanel() {
         initializeComponents();
@@ -52,6 +53,7 @@ public class ProductPanel extends JPanel {
         editButton = createStyledButton("Edit Product", new Color(255, 140, 0));
         deleteButton = createStyledButton("Delete Product", new Color(220, 20, 60));
         refreshButton = createStyledButton("Refresh", new Color(70, 130, 180));
+        printButton = createStyledButton("Print Report", new Color(128, 0, 128));
     }
 
     private JButton createStyledButton(String text, Color color) {
@@ -75,6 +77,7 @@ public class ProductPanel extends JPanel {
         topPanel.add(editButton);
         topPanel.add(deleteButton);
         topPanel.add(refreshButton);
+        topPanel.add(printButton);
 
         // Table with scroll pane
         JScrollPane scrollPane = new JScrollPane(productTable);
@@ -91,6 +94,7 @@ public class ProductPanel extends JPanel {
         refreshButton.addActionListener(e -> loadProducts());
         
         searchField.addActionListener(e -> searchProducts());
+        printButton.addActionListener(e -> printReport());
     }
 
     private void showAddProductDialog() {
@@ -262,5 +266,9 @@ public class ProductPanel extends JPanel {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error searching products: " + e.getMessage());
         }
+    }
+
+    private void printReport() {
+        new ReportPrinter(tableModel, "Products Report").printReport();
     }
 }

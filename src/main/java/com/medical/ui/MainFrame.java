@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
     private SupplierPanel supplierPanel;
     private SalesPanel salesPanel;
     private PurchasePanel purchasePanel;
+    private UserPanel userPanel;
 
     public MainFrame() {
         initializeComponents();
@@ -35,6 +36,7 @@ public class MainFrame extends JFrame {
         supplierPanel = new SupplierPanel();
         salesPanel = new SalesPanel();
         purchasePanel = new PurchasePanel();
+        userPanel = new UserPanel();
     }
 
     private void setupLayout() {
@@ -43,6 +45,7 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("Suppliers", createIcon("🏢"), supplierPanel, "Manage Suppliers");
         tabbedPane.addTab("Purchase", createIcon("🛒"), purchasePanel, "Purchase Management");
         tabbedPane.addTab("Sales Record", createIcon("📊"), salesPanel, "View Sales Records");
+        tabbedPane.addTab("Users", createIcon("👥"), userPanel, "Manage Users");
 
         add(tabbedPane, BorderLayout.CENTER);
         

@@ -1,6 +1,7 @@
 package com.medical.ui;
 
 import com.medical.util.DatabaseConnection;
+import com.medical.util.ReportPrinter;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,7 +13,7 @@ import java.sql.*;
 public class SalesPanel extends JPanel {
     private JTable salesTable;
     private DefaultTableModel tableModel;
-    private JButton refreshButton, exportButton;
+    private JButton refreshButton, exportButton, printButton;
     private JLabel totalSalesLabel;
 
     public SalesPanel() {
@@ -49,6 +50,11 @@ public class SalesPanel extends JPanel {
         exportButton.setForeground(Color.WHITE);
         exportButton.setFocusPainted(false);
 
+        printButton = new JButton("Print Report");
+        printButton.setBackground(new Color(128, 0, 128));
+        printButton.setForeground(Color.WHITE);
+        printButton.setFocusPainted(false);
+
         // Total sales label
         totalSalesLabel = new JLabel("Total Sales: $0.00");
         totalSalesLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -60,6 +66,7 @@ public class SalesPanel extends JPanel {
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.add(refreshButton);
         topPanel.add(exportButton);
+        topPanel.add(printButton);
 
         // Table
         JScrollPane scrollPane = new JScrollPane(salesTable);
@@ -77,6 +84,7 @@ public class SalesPanel extends JPanel {
     private void setupEventHandlers() {
         refreshButton.addActionListener(e -> loadSalesData());
         exportButton.addActionListener(e -> exportToCSV());
+        printButton.addActionListener(e -> printReport());
     }
 
     private void loadSalesData() {
@@ -133,5 +141,9 @@ public class SalesPanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "Error exporting data: " + e.getMessage());
             }
         }
+    }
+
+    private void printReport() {
+        new ReportPrinter(tableModel, "Sales Report").printReport();
     }
 }
